@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     //이미지를 처리할 때 1.static 폴더 아래 이미지
     //               2.업로드 폴더 위치 이미지 설정
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("images/**")
+        registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
 
         registry.addResourceHandler("/uploaded/**").

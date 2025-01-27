@@ -50,15 +50,18 @@ public class KHTBookServiceImpl implements KHTBookService {
             // 어떤 파일을 저장할 것이다 (어디에+어떤 이름으로) = transferTo.
             imagePath.transferTo(file);
 
+
+            String dbImagePath = "/uploaded/"+imgPath;
             KHTBook khtBook = new KHTBook();
             khtBook.setId(id);
             khtBook.setTitle(title);
             khtBook.setAuthor(author);
             khtBook.setGenre(genre);
             //진짜로 저장된 이미지 장소를 숨기고 사용자들에게는 images 경로로 보여주게끔 설정
-            khtBook.setImagePath("/images"+imgPath);
+            khtBook.setImagePath(dbImagePath);
 
-            return khtBookMapper.bookUpdate(id, title, author, genre, imgPath);
+           // return khtBookMapper.bookUpdate(id, title, author, genre, imgPath);  imgPath = only img File Name Save
+            return khtBookMapper.bookUpdate(id, title, author, genre, dbImagePath); // dbImagePath = /uploaded/FileName save
 
         } catch (IOException e) {
             //개발자가 컴퓨터 작업에 문제가 있을 때 문제를 확인하는 멘트
