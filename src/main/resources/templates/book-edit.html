@@ -57,7 +57,7 @@
   //이미지 미리보기 코드임
   //javasvript -> jquery로 수정할것
 
-  $("#imagePath").click("change", function (event) {
+  $("#imagePath").on("change", function (event) {
     const file = event.target.files[0];
     const preview = $("#imagePreview");
     preview.innerHTML = "";
@@ -81,27 +81,27 @@
     }
   });
 
-
-  document.getElementById("imagePath").addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById("imagePreview");
-    preview.innerHTML = "";
-
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.alt = "미리보기 이미지";
-        img.style.maxWidth = "100%";
-        img.style.maxHeight = "300px";
-        preview.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      preview.innerHTML = "<span>지원하지 않는 파일 형식입니다.</span>";
-    }
-  });
+  //
+  // document.getElementById("imagePath").addEventListener("change", function (event) {
+  //   const file = event.target.files[0];
+  //   const preview = document.getElementById("imagePreview");
+  //   preview.innerHTML = "";
+  //
+  //   if (file && file.type.startsWith("image/")) {
+  //     const reader = new FileReader();
+  //     reader.onload = function (e) {
+  //       const img = document.createElement("img");
+  //       img.src = e.target.result;
+  //       img.alt = "미리보기 이미지";
+  //       img.style.maxWidth = "100%";
+  //       img.style.maxHeight = "300px";
+  //       preview.appendChild(img);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     preview.innerHTML = "<span>지원하지 않는 파일 형식입니다.</span>";
+  //   }
+  // });
 
 
   const params = new URLSearchParams(window.location.search);

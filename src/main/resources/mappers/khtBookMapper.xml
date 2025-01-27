@@ -24,4 +24,9 @@
         WHERE id = #{id}
     </update>
 
+
+    <delete id="deleteBook">
+        DELETE FROM khtbook
+        WHERE id = #{id}
+    </delete>
 </mapper>

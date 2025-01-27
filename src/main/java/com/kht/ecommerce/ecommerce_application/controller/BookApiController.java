@@ -42,15 +42,19 @@ public class BookApiController {
                                @RequestParam("author") String author,
                                @RequestParam("genre") String genre,
                                @RequestParam("imagePath") MultipartFile imagePath) {
-        System.out.println("============Controlelr 출력 ===================");
+
+        System.out.println("============= Controller  출력 ===================");
         System.out.println("title : "+title);
         System.out.println("author : "+author);
         System.out.println("genre : "+genre);
         System.out.println("imagePath : "+ imagePath);
         return khtBookService.bookUpdate(id, title, author, genre, imagePath);
 
-//        return khtBookService.bookDetail(id);
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public int bookDelete(@PathVariable int id) {
+        return khtBookService.deleteBook(id);
     }
 
 

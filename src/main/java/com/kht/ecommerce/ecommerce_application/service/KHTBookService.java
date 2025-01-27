@@ -13,4 +13,6 @@ public interface KHTBookService {
     KHTBook bookDetail(int id);
 
     int bookUpdate(int id, String title, String author, String genre, MultipartFile imagePath);
+
+    int deleteBook(int id);
 }

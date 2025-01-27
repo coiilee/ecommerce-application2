@@ -43,6 +43,7 @@
                                 <td><a href="book?id=${value.id}">${value.title}</a></td>
                                 <td>${value.author}</td>
                                 <td>${value.genre}</td>
+                                <td><img class="book-image" src="${value.imagePath}"></td>
                                 <td><img class="book-image" src="${value.imagePath ? value.imagePath : '/images/defaultImg.png'}"></td>
                                                                             <!-- 이미지가 존재하지 않을 경우 대체 이미지로 설정.
                                                                             대체 이미지 = defaultImg.png 로 대체

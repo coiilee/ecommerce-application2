@@ -67,6 +67,11 @@ public class KHTBookServiceImpl implements KHTBookService {
         }
     }
 
+    @Override
+    public int deleteBook(int id) {
+        return khtBookMapper.deleteBook(id);
+    }
+
 //
 //
 //        //이미지 이름만 get 가져와서 String 위치 + 이미지 이름만 DB에 저장하자 작성

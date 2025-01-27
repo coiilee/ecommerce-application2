@@ -19,4 +19,7 @@ public interface KhtBookMapper {
     // void ->
 //    void bookUpdate(KHTBook book);
     int bookUpdate(int id, String title, String author, String genre, String imagePath); //multipart String으로 바꿔서 넣어주기
+
+    int deleteBook(int id);
+
 }
