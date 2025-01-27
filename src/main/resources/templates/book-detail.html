@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책 상세보기</title>
+    <link rel="stylesheet" href="/book-style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">책 상세보기</h1>
+    <div id="book-detail" class="book-detail">
+    </div>
+
+</div>
+<script>
+    //bookId를 url 주소에서 id에 해당하는 값이 있는지 확인(=검색) 하고, 존재하는 값을 가져와서 사용
+    const params = new URLSearchParams(window.location.search);
+    const bookId = params.get("id");
+
+    $.ajax({
+        url: `api/book/${bookId}`,
+        method: "GET",
+        success: function (book) {
+            $("#book-detail").html(`
+                        <p><strong>제목 : ${book.title}</strong> </p>
+                        <p><strong>작가 : ${book.author}</strong> </p>
+                        <p><strong>장르 :${book.genre}</strong> </p>
+                        <p><strong>이미지 : <img class="book-image" src="${book.imagePath ? book.imagePath : '/images/defaultImg.png'}"></strong> </p>
+                        <!-- URLSearchParams 에서 가져온 id 값으로 해당하는 데이터 수정 경로 설정 -->
+                        <a class="btn" id="edit-btn" href="/book/update?id=${bookId}">수정하기</a>
+                    `);
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>책 목록</title>
+  <link rel="stylesheet" href="book-style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">책 목록</h1>
+  <table class="book-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>제목</th>
+      <th>저자</th>
+      <th>장르</th>
+      <th>이미지</th>
+    </tr>
+    </thead>
+    <tbody id="book-list">
+
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $.ajax({
+    url : '/api/bookList',
+    method: 'GET',
+    success: function (data) {
+  /*
+  * data = List KHTBook 배열 형태로 들어있는 상태
+  * value = 목록 형태로 되어있는 KHTBook  을 하나씩 꺼내서 가져온 상태
+  *
+  * */
+      $.each(data,function (index,value) {
+        $("#book-list").append(`
+                            <tr>
+                                <td>${value.id}</td>
+                                <td><a href="book?id=${value.id}">${value.title}</a></td>
+                                <td>${value.author}</td>
+                                <td>${value.genre}</td>
+                                <td><img class="book-image" src="${value.imagePath ? value.imagePath : '/images/defaultImg.png'}"></td>
+                                                                            <!-- 이미지가 존재하지 않을 경우 대체 이미지로 설정.
+                                                                            대체 이미지 = defaultImg.png 로 대체
+                                                                            삼항 연산자 사용-->
+                            </tr>
+                        `);
+      })
+    }
+    })
+</script>
+</body>
+</html>

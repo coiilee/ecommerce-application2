@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 상세보기</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h1>상품 상세 정보</h1>
+<div id="product-detail-container"></div>
+<script src="/product_detail.js"></script>
+<script>
+    const queryParams = new URLSearchParams(window.location.search)
+    const productId = queryParams.get('id');
+
+    $.ajax({
+        url: `/api/product/${productId}`,
+        method: "GET",
+        success: function (data){
+            // let productDetail =
+            //     `<p>상품이름 : ${data.title}</p>`
+            //         `<p>가격 : ${data.price}</p>`
+            //         `<p>설명 : ${data.description}</p>`
+            //         `<p>카테고리 : ${data.category}</p>`
+            //         `<img src="${data.image}" alt="상품 이미지">`;
+            //
+            // $('#person-detail-container').append(productDetail);
+            if(data){
+                $('#product-detail-container').append(`<p>상품이름 : ${data.title}</p>
+                <p>가격 : ${data.price}</p>
+                <p>설명 : ${data.description}</p>
+                <p>카테고리 : ${data.category}</p>
+                <p>평점 : ${data.ratingRate}</p>
+                <p>평점 수 : ${data.ratingCount}</p>
+                <img src="${data.image}" style="width: 200px;height: 200px" alt="상품 이미지">
+                    <a href="/update/product?id=${data.id}">수정하기</a>`);
+                    }
+                    },
+        error: function (error){
+            console.log("error: ",error);
+            $('#product-detail-container').html('<p>데이터를 가져오는데 문제가 발생했습니다.</p>');
+        }
+    })
+</script>
+</body>
+</html>
+

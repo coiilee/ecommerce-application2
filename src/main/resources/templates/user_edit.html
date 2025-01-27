@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유저 수정하기</title>
+    <link rel="icon" href="/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>유저 수정하기</h1>
+    <form>
+        <label>유저이름 : </label>
+        <span id="username"></span>
+<!--        <p id="lastname"></p><p id="firstname"></p>-->
+
+        <label for="email">이메일 : </label>
+        <input type="email" id="email">
+
+        <label for="phone">핸드폰 번호 : </label>
+        <input type="text" id="phone" pattern="[0-9\-]">
+
+        <label for="city">사는 곳 : </label>
+        <input type="text" id="city">
+
+        <label for="street">도로명 주소 : </label>
+        <input type="text" id="street">
+
+        <label for="streetNumber">도로 번호 : </label>
+        <input type="text" id="streetNumber">
+
+        <label for="zipcode">우편번호 : </label>
+        <input type="number" id="zipcode">
+
+        <button type="button" id="editBtn">수정하기</button>
+
+    </form>
+
+<script>
+    // 1. id 값으로 유저 상세정보 불러오기 ajax
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id);
+
+    $.ajax({
+        url: `/api/user/${id}`,
+        method: "GET",
+        success:
+            function (data) {
+                /* p 태그는 text 형식으로 값 넣어줘야함*/
+                $("#username").text(data.lastname + data.firstname);
+                // $("#username").text(data.lastname);
+                // $("#firstname").text(data.firstname);
+
+                /* input 태그는 val 형식으로 값 넣어줘야함*/
+                $("#email").val(data.email);
+                $("#phone").val(data.phone);
+                $("#city").val(data.city);
+                $("#street").val(data.street);
+                $("#streetNumber").val(data.streetNumber);
+                $("#zipcode").val(data.zipcode);
+
+            },
+        error:
+            function (err) {
+                alert("데이터를 가져올 수 없습니다.");
+            }
+
+    })
+
+    //PUTMapping 으로 수정 작성한 내용을 DB에 저장하는 버튼
+    $('#editBtn').click(function (event){
+        event.preventDefault();
+        //PUT Method 이용해서 회원정보 수정 코드 작성
+        //api url 주소 = /api/
+        //html -> mapper.xml -> mapper.java -> service.java -> serviceImpl.java -> ApiController.java 흐름
+        $.ajax({
+            url: `/api/user/edit/${id}`,
+            method : "PUT",
+            contentType : 'application/json', //json 형식 = 글자형식 전송
+            data : JSON.stringify({
+                email : $('#email').val(),               //input 에 있는 값을 가져와서 email 이라는 이름으로 작성한 값을 전달
+                phone : $('#phone').val(),               //input 에 있는 값을 phone 이라는 이름으로 사용자가 작성한 값을 전달
+                city : $('#city').val(),                 //input 에 있는 값을 city 이라는 이름으로 사용자가 작성한 값을 전달
+                street : $('#street').val(),             //input 에 있는 값을 street 이라는 이름으로 사용자가 작성한 값을 전달
+                streetNumber : $('#streetNumber').val(), //input 에 있는 값을 streetNumber 이라는 이름으로 사용자가 작성한 값을 전달
+                zipcode : $('#zipcode').val()            //input 에 있는 값을 zipcode 이라는 이름으로 사용자가 작성한 값을 전달
+            }),
+
+            success: function (data){ //contentType 으로 data 전송 성공했음을 나타냄
+                      alert("사용자 정보 수정 성공!");
+                      window.location.href= `/user?id=${id}`; //유저 상세보기 주소로 이동
+            },
+            error : function (err){ //컨트롤러에서 데이터를 서비스로 전달하는데 문제가 생겼을 때 발생하는 alert
+                      alert("데이터를 수정할 수 없습니다. 다시 시도해주세요.");
+            }
+
+        })
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kht.ecommerce.ecommerce_application.mapper.KhtBookMapper">
+
+    <select id="getAllBooks">
+        SELECT *
+        FROM khtbook
+    </select>
+
+    <select id="bookDetail">
+        SELECT *
+        FROM khtbook
+        WHERE id = #{id}
+    </select>
+
+    <update id="bookUpdate">
+        UPDATE khtbook
+        SET
+            author = #{author},
+            title = #{title},
+            genre = #{genre},
+            image_path = #{imagePath}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
