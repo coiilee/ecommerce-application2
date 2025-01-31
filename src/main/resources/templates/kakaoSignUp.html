@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,25 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<title>회원가입</title>
+<form>
+    <label>닉네임 : </label>
+    <input type="text" name="kakao" th:value="${nickname}">
+
+    <label>이름 : </label>
+    <input type="text" name="kakao">
+
+    <label>이메일 : </label>
+    <input type="email" name="kakao" th:value="${email}" disabled> <!--disabled로 이메일 수정 불가하게 설정 -->
+
+    <image src th:src=""> </image>
+
+    <button>가입하기</button>
+</form>
+
 
 </body>
+
+
+
 </html>
