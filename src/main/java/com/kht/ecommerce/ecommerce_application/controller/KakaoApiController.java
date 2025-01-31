@@ -92,21 +92,21 @@ public class KakaoApiController {
         System.out.println(userInfo);
 
         Map<String, Object> properties = (Map<String, Object>) userInfo.get("properties");
-
-        Map<String, Object> kakaoAccount = (Map<String, Object>) userInfo.get("kakao_account");
-
         //추후 프로젝트에 맞게 카카오에서 가져올 값 설정
         //닉네임
         String nickname = (String) properties.get("nickname"); // nickname 이외의 것도 get으로 추가할수 있음 (gender, email 등등... )
-        //이메일 ( 내 애플리케이션>제품 설정>카카오 로그인>동의항목 에서 이메일 필수 동의)
-        String email = (String) kakaoAccount.get("email");
-        //프로필 이미지
-        String profileImage = (String) properties.get("profile_image");
-
         //한글 깨짐 방지
         String encodedNickname = URLEncoder.encode(nickname, StandardCharsets.UTF_8);
 //        email의 경우 영어+숫자 형식이기 때문에 -> 변환할 필요 XX !! UTF_8은 입력값이 영어가 아닌 한글,특수문자일 때 사용
 //        String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8);
+        //프로필 이미지
+        String profileImage = (String) properties.get("profile_image");
+
+        Map<String, Object> kakaoAccount = (Map<String, Object>) userInfo.get("kakao_account");
+
+        //이메일 ( 내 애플리케이션>제품 설정>카카오 로그인>동의항목 에서 이메일 필수 동의)
+        String email = (String) kakaoAccount.get("email");
+
 
 
 
