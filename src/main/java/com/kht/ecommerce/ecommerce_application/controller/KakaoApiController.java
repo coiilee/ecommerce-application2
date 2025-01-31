@@ -88,17 +88,18 @@ public class KakaoApiController {
 
         // 여기 아래부터 프로젝트에 맞게 카카오에서 가져올 값 수정해서 사용
         Map userInfo = userResponse.getBody();
+        System.out.println("==============Controller : userinfo=====================");
+        System.out.println(userInfo);
+
         Map<String, Object> properties = (Map<String, Object>) userInfo.get("properties");
+
         Map<String, Object> kakaoAccount = (Map<String, Object>) userInfo.get("kakao_account");
 
         //추후 프로젝트에 맞게 카카오에서 가져올 값 설정
-        //추후 프로젝트에 맞게 카카오에서 가져올 값 설정
         //닉네임
         String nickname = (String) properties.get("nickname"); // nickname 이외의 것도 get으로 추가할수 있음 (gender, email 등등... )
-
         //이메일 ( 내 애플리케이션>제품 설정>카카오 로그인>동의항목 에서 이메일 필수 동의)
         String email = (String) kakaoAccount.get("email");
-
         //프로필 이미지
         String profileImage = (String) properties.get("profile_image");
 
@@ -111,7 +112,7 @@ public class KakaoApiController {
 
         // 키-값 받아오기 위해 키-값 시작을 알리는 것은 '?' 기호를 사용함
         // 키-값 여러 값을 받아오고 전달할 경우는 '&' 기호로 키-값 다수 사용
-        return "redirect:/signup?nickname=" + encodedNickname + "&email=" + email;
+        return "redirect:/signup?nickname=" + encodedNickname + "&email=" + email + "&profileImage=" + profileImage; //image에는 = 안붙여도되나
                                                                 // 값 추가할 때는 '&'으로 연결.
                                                                 // 주소에서 ? 는 항상 하나만 사용됨
 

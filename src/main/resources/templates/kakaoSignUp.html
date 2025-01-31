@@ -19,14 +19,11 @@
     <label>이메일 : </label>
     <input type="email" name="kakao" th:value="${email}" disabled> <!--disabled로 이메일 수정 불가하게 설정 -->
 
-    <image src th:src=""> </image>
+    <label>프로필 사진 : </label>
+    <img th:src="${profileImage}" alt="카카오 프로필 이미지">
 
     <button>가입하기</button>
+
 </form>
-
-
 </body>
-
-
-
 </html>
